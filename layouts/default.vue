@@ -14,6 +14,9 @@ export default {}
   text-align: center;
   .el-header {
     background-color: #409eff;
+    span {
+      font-size: xx-large;
+    }
   }
 }
 </style>

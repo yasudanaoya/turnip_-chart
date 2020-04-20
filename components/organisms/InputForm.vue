@@ -24,6 +24,9 @@
       v-model="price"
       clearable
     )
+    el-button(
+      type="primary"
+    ) 入力
 </template>
 
 <script>
@@ -43,7 +46,7 @@ export default {
 .input-form {
   text-align: center;
   .el-input {
-    width: 50%;
+    width: 10%;
   }
 }
 </style>
