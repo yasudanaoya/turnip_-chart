@@ -2,22 +2,24 @@
   .input-form
     el-select(
       v-model="param.dateTime"
-      clearable
       placeholder="曜日"
+      size="medium"
     )
       el-option(
-        v-for="item in dateOption"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
+        v-for="day in weekdays"
+        :key="day"
+        :label="day"
+        :value="day"
       )
     el-radio(
       v-model="param.sunshine"
       label="am"
+      :disabled="isSunday"
     ) 午前
     el-radio(
       v-model="param.sunshine"
       label="pm"
+      :disabled="isSunday"
     ) 午後
     el-input-number(
       placeholder="株価(ベル)"
@@ -25,10 +27,12 @@
       autocomplete="off"
       :min="1"
       :controls="false"
+      size="medium"
     )
     el-button(
       type="primary"
       @click="submit"
+      :disabled="submitValid"
     ) 入力
 </template>
 
@@ -38,18 +42,54 @@ import { mapMutations } from 'vuex'
 export default {
   data() {
     return {
-      dateOption: [],
+      weekdays: [
+        '日曜日',
+        '月曜日',
+        '火曜日',
+        '水曜日',
+        '木曜日',
+        '金曜日',
+        '土曜日'
+      ],
       param: {
         dateTime: '',
-        price: null,
-        sunshine: ''
+        price: 100,
+        sunshine: '-'
       }
     }
   },
+
+  computed: {
+    isSunday() {
+      return this.param.dateTime === '日曜日'
+    },
+
+    weekDayValid() {
+      if (this.isSunday) {
+        return false
+      } else {
+        return this.param.sunshine === '-'
+      }
+    },
+
+    submitValid() {
+      return this.param.dateTime === '' || this.weekDayValid
+    }
+  },
+
   methods: {
     ...mapMutations('result', ['add']),
     submit() {
       this.add(this.param)
+      this.cleanData()
+    },
+
+    cleanData() {
+      this.param = {
+        dateTime: '',
+        price: null,
+        sunshine: '-'
+      }
     }
   }
 }

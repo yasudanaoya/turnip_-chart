@@ -1,7 +1,9 @@
 <template lang="pug">
   el-table(
-    :data="tableData"
+    :data="results"
     border
+    size="medium"
+    :span-method="objectSpanMethod"
   )
     el-table-column(
       prop="dateTime"
@@ -18,26 +20,47 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data() {
     return {
-      tableData: [
-        {
-          dateTime: '日',
-          sunshine: '-',
-          price: 108
-        },
-        {
-          dateTime: '月',
-          sunshine: '午前',
-          price: 142
-        },
-        {
-          dateTime: '月',
-          sunshine: '午後',
-          price: 141
-        }
+      weekdays: [
+        '日曜日',
+        '月曜日',
+        '火曜日',
+        '水曜日',
+        '木曜日',
+        '金曜日',
+        '土曜日'
       ]
+    }
+  },
+
+  computed: {
+    ...mapState('result', ['results'])
+  },
+
+  methods: {
+    objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+      if (columnIndex === 0) {
+        if (rowIndex === 0) {
+          return {
+            rowspan: 1,
+            colspan: 1
+          }
+        } else if (rowIndex % 2 === 1) {
+          return {
+            rowspan: 2,
+            colspan: 1
+          }
+        } else {
+          return {
+            rowspan: 0,
+            colspan: 0
+          }
+        }
+      }
     }
   }
 }
