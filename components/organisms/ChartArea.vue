@@ -15,6 +15,14 @@ export default {
     }
   },
 
+  data() {
+    return {
+      chartOption: {
+        maintainAspectRatio: false
+      }
+    }
+  },
+
   computed: {
     getResult() {
       const horizontal = []
@@ -48,10 +56,7 @@ export default {
             ],
             borderWidth: 1
           }
-        ],
-        chartOption: {
-          maintainAspectRatio: false
-        }
+        ]
       }
     }
   },
@@ -71,7 +76,6 @@ export default {
   float: right;
   position: relative;
   width: 40%;
-  height: 50%;
   margin: 0 5%;
 }
 </style>
