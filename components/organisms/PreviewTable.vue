@@ -20,9 +20,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
+  props: {
+    results: {
+      type: Array,
+      required: true
+    }
+  },
+
   data() {
     return {
       weekdays: [
@@ -35,10 +40,6 @@ export default {
         '土曜日'
       ]
     }
-  },
-
-  computed: {
-    ...mapState('result', ['results'])
   },
 
   methods: {
@@ -68,7 +69,9 @@ export default {
 
 <style lang="scss" scoped>
 .el-table {
-  width: 33%;
-  margin: 0 33%;
+  width: 40%;
+  margin: 0;
+  float: left;
+  margin: 5%;
 }
 </style>

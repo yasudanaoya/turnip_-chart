@@ -37,8 +37,6 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-
 export default {
   data() {
     return {
@@ -78,9 +76,8 @@ export default {
   },
 
   methods: {
-    ...mapMutations('result', ['add']),
     submit() {
-      this.add(this.param)
+      this.$emit('submit', this.param)
       this.cleanData()
     },
 
