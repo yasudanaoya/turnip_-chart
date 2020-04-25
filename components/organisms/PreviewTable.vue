@@ -2,7 +2,7 @@
   el-table(
     :data="results"
     border
-    size="medium"
+    size="mini"
     :span-method="objectSpanMethod"
   )
     el-table-column(
@@ -11,7 +11,7 @@
     )
     el-table-column(
       prop="sunshine"
-      label="AM / PM"
+      label="午前 / 午後"
     )
     el-table-column(
       prop="price"
@@ -68,6 +68,7 @@ export default {
 
 <style lang="scss" scoped>
 .el-table {
-  width: 60%;
+  width: 33%;
+  margin: 0 33%;
 }
 </style>

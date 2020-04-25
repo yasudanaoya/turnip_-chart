@@ -13,12 +13,12 @@
       )
     el-radio(
       v-model="param.sunshine"
-      label="am"
+      label="午前"
       :disabled="isSunday"
     ) 午前
     el-radio(
       v-model="param.sunshine"
-      label="pm"
+      label="午後"
       :disabled="isSunday"
     ) 午後
     el-input-number(
@@ -54,7 +54,7 @@ export default {
       param: {
         dateTime: '',
         price: 100,
-        sunshine: '-'
+        sunshine: ''
       }
     }
   },
@@ -68,12 +68,12 @@ export default {
       if (this.isSunday) {
         return false
       } else {
-        return this.param.sunshine === '-'
+        return !this.param.sunshine
       }
     },
 
     submitValid() {
-      return this.param.dateTime === '' || this.weekDayValid
+      return !this.param.dateTime || this.weekDayValid || !this.param.price
     }
   },
 
@@ -87,8 +87,7 @@ export default {
     cleanData() {
       this.param = {
         dateTime: '',
-        price: null,
-        sunshine: '-'
+        sunshine: ''
       }
     }
   }
