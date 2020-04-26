@@ -21,12 +21,10 @@
       label="午後"
       :disabled="isSunday"
     ) 午後
-    el-input-number(
+    el-input(
       placeholder="株価(ベル)"
       v-model.number="param.price"
       autocomplete="off"
-      :min="1"
-      :controls="false"
       size="medium"
     )
     el-button(
@@ -51,7 +49,7 @@ export default {
       ],
       param: {
         dateTime: '',
-        price: 100,
+        price: null,
         sunshine: ''
       }
     }
@@ -79,6 +77,10 @@ export default {
     submit() {
       this.$emit('submit', this.param)
       this.cleanData()
+    },
+
+    setDate(date) {
+      this.param = date
     },
 
     cleanData() {

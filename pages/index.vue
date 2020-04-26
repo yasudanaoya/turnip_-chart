@@ -2,13 +2,16 @@
   el-main
     input-form(
       @submit="submit"
+      ref="input"
     )
     preview-table(
       :results="results"
+      @set-date="setDate"
     )
     chart-area(
       :results="results"
     )
+
 </template>
 
 <script>
@@ -26,20 +29,35 @@ export default {
   data() {
     return {
       results: [
-        { dateTime: '日曜日', sunshine: '-', price: 100 },
-        { dateTime: '月曜日', sunshine: '午前', price: 0 },
-        { dateTime: '月曜日', sunshine: '午後', price: 0 },
-        { dateTime: '火曜日', sunshine: '午前', price: 0 },
-        { dateTime: '火曜日', sunshine: '午後', price: 0 },
-        { dateTime: '水曜日', sunshine: '午前', price: 0 },
-        { dateTime: '水曜日', sunshine: '午後', price: 0 },
-        { dateTime: '木曜日', sunshine: '午前', price: 0 },
-        { dateTime: '木曜日', sunshine: '午後', price: 0 },
-        { dateTime: '金曜日', sunshine: '午前', price: 0 },
-        { dateTime: '金曜日', sunshine: '午後', price: 0 },
-        { dateTime: '土曜日', sunshine: '午前', price: 0 },
-        { dateTime: '土曜日', sunshine: '午後', price: 0 }
+        { dateTime: '日曜日', sunshine: '', price: '' },
+        { dateTime: '月曜日', sunshine: '午前', price: '' },
+        { dateTime: '月曜日', sunshine: '午後', price: '' },
+        { dateTime: '火曜日', sunshine: '午前', price: '' },
+        { dateTime: '火曜日', sunshine: '午後', price: '' },
+        { dateTime: '水曜日', sunshine: '午前', price: '' },
+        { dateTime: '水曜日', sunshine: '午後', price: '' },
+        { dateTime: '木曜日', sunshine: '午前', price: '' },
+        { dateTime: '木曜日', sunshine: '午後', price: '' },
+        { dateTime: '金曜日', sunshine: '午前', price: '' },
+        { dateTime: '金曜日', sunshine: '午後', price: '' },
+        { dateTime: '土曜日', sunshine: '午前', price: '' },
+        { dateTime: '土曜日', sunshine: '午後', price: '' }
       ]
+    }
+  },
+
+  watch: {
+    results: {
+      deep: true,
+      handler(newVal) {
+        localStorage.setItem('results', JSON.stringify(newVal))
+      }
+    }
+  },
+
+  mounted() {
+    if (localStorage.results) {
+      this.results = JSON.parse(localStorage.results)
     }
   },
 
@@ -56,6 +74,10 @@ export default {
         }
       })
       Object.assign(this.results[targetIndex], param)
+    },
+
+    setDate(date) {
+      this.$refs.input.setDate(date)
     }
   }
 }

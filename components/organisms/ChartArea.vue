@@ -76,6 +76,6 @@ export default {
   float: right;
   position: relative;
   width: 40%;
-  margin: 0 5%;
+  margin: 5%;
 }
 </style>
