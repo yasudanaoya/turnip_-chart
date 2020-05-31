@@ -4,7 +4,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'あつ森カブ値動きチャート',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -14,7 +14,13 @@ module.exports = {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: 'https://use.fontawesome.com/releases/v5.6.1/css/all.css'
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -50,6 +56,11 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv'
   ],
+  env: {
+    BASE_URL: process.env.BASE_URL || 'http://localhost:3000',
+    SITE_NAME: process.env.SITE_NAME,
+    TWITTER_ACCOUNT: process.env.TWITTER_ACCOUNT
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

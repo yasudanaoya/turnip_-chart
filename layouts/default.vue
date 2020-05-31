@@ -3,10 +3,16 @@
     el-header
       span あつ森カブ値動きチャート
     nuxt.default
+    Footer
 </template>
 
 <script>
-export default {}
+import Footer from '../components/organisms/Footer'
+export default {
+  components: {
+    Footer
+  }
+}
 </script>
 
 <style lang="scss" scoped>
